@@ -1,0 +1,87 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+img {
+    width: 400px;
+    height: 520px;
+    border-radius: 10px;
+}
+
+span {
+    color: red;
+}
+
+.maincontainer {
+    width: 98vw;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 100px;
+    /* background-color: aqua; */
+    gap: 20px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.formDiv {
+    width: 400px;
+    height: 445px;
+    background-color: rgba(218, 204, 189, 255);
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+    border-radius: 10px;
+
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 10px;
+
+}
+
+.register,
+.prepopulate {
+    padding: 20px;
+    border-radius: 10px;
+    border-color: transparent;
+    background-color: cadetblue;
+}
+
+/* #gendertext{
+    text-align: center;
+} */
+input,
+select {
+    padding: 5px;
+}
+
+input.ng-invalid.ng-touched {
+    border: 1px solid red;
+}
+
+.invalid {
+    background-color: #d68130;
+}
+
+.valid {
+    background-color: cadetblue;
+}
