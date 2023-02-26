@@ -3,41 +3,48 @@
     <div class="content">
         <div class="imgDiv">
             <img
-                src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/gettyimages-1144982182.jpg?crop=0.669xw:1.00xh;0.166xw,0&resize=1200:*">
+                src="https://images.lifestyleasia.com/wp-content/uploads/sites/7/2021/03/02155402/photo-1610575828349-43f195e95452.jpeg">
 
         </div>
 
         <div class="formDiv">
-            <form class="form">
+            <form class="form" [formGroup]="form" (ngSubmit)="submitData()">
 
-                <!-- <div ngModelGroup="personalDetails"> -->
+                <div formGroupName="personalDetails">
 
-                <div class="form-group">
-                    <label for="fullname">Full Name:</label>
-                    <input type="text" name="fullname" ngModel required #name="ngModel">
+                    <div class="form-group">
+                        <label for="fullname">Full Name:</label>
+                        <input type="text" name="fullname" formControlName="fullname">
+                        <span class="error" *ngIf="!form.get('fullname')?.valid && form.get('fullname')?.touched">Please
+                            Enter a Valid Name</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" name="email" required formControlName="email">
+                        <span class="error" *ngIf="!form.get('email')?.valid && form.get('email')?.touched">
+                            <span class="error" *ngIf="form.get('email')!.errors!['required']">Please Input an
+                                Email</span>
+                            <span class="error" *ngIf="form.get('email')!.errors!['email']">Please Enter a Valid
+                                Email</span>
+                        </span>
+                    </div>
                 </div>
+
 
                 <div class="form-group">
                     <label for="role">Role:</label>
-                    <select name="role" [ngModel]="default" required #role="ngModel">
+                    <select name="role" formControlName="role">
                         <option value="default">Select a role that fits you</option>
-                        <option value="intern">Software Engineer Intern</option>
-                        <option value="junior">Junior Software Engineer</option>
-                        <option value="senior">Senior Software Engineer</option>
+                        <option value="Software Engineer Intern">Software Engineer Intern</option>
+                        <option value="Junior Software Engineer">Junior Software Engineer</option>
+                        <option value="Senior Software Engineer">Senior Software Engineer</option>
                     </select>
-                    <span *ngIf="!role.valid && role.touched" class="error">Please enter a valid role</span>
+                    <span class="error" *ngIf="!form.get('role')?.valid && form.get('role')?.touched">Please Enter a
+                        Valid Role</span>
 
                 </div>
 
-                <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" name="email" ngModel email #email="ngModel" required>
-                    <span *ngIf="!email.valid && email.touched" class="error">Please enter a valid email ending with
-                        @thejitu.com</span>
-                    <!-- <input type="email" name="email" ng-model="email" ng-pattern="/^[A-Za-z0-9._%+-]+@thejitu.com$/"/>
-                        <span ng-show="email.$invalid && email.$touched">wrong email!</span> -->
-
-                </div>
 
                 <!-- </div> -->
 
@@ -49,25 +56,33 @@
 
                 <div class="form-group">
                     <label for="password">Password:</label>
-                    <input type="password" name="password" ngModel #password="ngModel" required
+                    <input type="password" name="password" formControlName="password" required
                         pattern='^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%?&])[A-Za-z\d$@$!%?&]{8,}$' />
-                    <span *ngIf="!password.valid && password.touched" class="error">Enter a password of min 8 characters
-                        which contain at least one uppercase letter, at least one lowercase letter, at least one numeric
-                        digit and at least one special character</span>
-
+                    <span class="error" *ngIf="!form.get('password')?.valid && form.get('password')?.touched">Please
+                        Enter a Valid Password</span>
                 </div>
 
                 <p id="gendertext"><b>Select Gender Below</b></p>
                 <div class="form-group" *ngFor="let g of genders">
-                    <label> <input type="radio" [value]="g" name="gender" ngModel required />{{g}}</label>
+                    <label> <input type="radio" [value]="g" name="gender" formControlName="gender"
+                            required />{{g}}</label>
                 </div>
 
                 <div class="form-group">
-                    <button type="submit" [ngClass]="{invalid:!form.valid, valid:form.valid}"
-                        class="register">REGISTER</button>
+                    <button type="submit" class="register" [disabled]="!form.valid"
+                        [ngClass]="{invalid:!form.valid, valid:form.valid}">REGISTER</button>
 
-                    <button class="prepopulate" (click)="prepopulate()">PREPOPULATE</button>
+                    <!-- <button class="prepopulate">PREPOPULATE</button> -->
+                    <p>Add Hobbies</p>
+                    <div class="form-group" formArrayName="hobbies">
 
+                        <button class="hobbies" (click)="addHobby()">ADD HOBBIES</button>
+                        <div class="newHobby" *ngFor="let control of getControls(); let i= index">
+                            <input type="text" formControlName="{{i}}" />
+                            <p class="close" (click)="removeHobby(i)">X</p>
+                        </div>
+
+                    </div>
                 </div>
 
             </form>

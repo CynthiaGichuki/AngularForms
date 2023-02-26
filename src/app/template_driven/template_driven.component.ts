@@ -11,12 +11,6 @@ export class template_driven {
     genders = ['Male', 'Female']
 
     @ViewChild('form') form!: NgForm
-
-    register() {
-        console.log(this.form);
-        this.form.reset()
-    }
-
     prepopulate() {
         this.form.setValue({
             fullname: 'Cynthia Gichuki',
@@ -25,6 +19,10 @@ export class template_driven {
             email: 'gichukicynthia1@thejitu.com',
             password: 'Password@2023'
         })
+    }
+    register() {
+        console.log(this.form);
+        this.form.reset()
     }
 
     //this.form.form.patchValue({

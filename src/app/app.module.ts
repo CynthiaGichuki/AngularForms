@@ -10,7 +10,7 @@ import { ReactiveComponent } from './reactive/reactive.component';
   declarations: [
     AppComponent,
     template_driven,
-    ReactiveComponent
+    ReactiveComponent,
   ],
   imports: [
     BrowserModule,
